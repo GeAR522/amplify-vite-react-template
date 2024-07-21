@@ -1,39 +1,80 @@
-import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import * as React from 'react';
+import type { Schema } from '../amplify/data/resource';
+import { generateClient } from 'aws-amplify/data';
+import MainSideNavBar from '../components/navs/MainSideNavBar';
+import CenteredContent from '../components/content/CenteredContent';
+import ContentCard from '../components/cards/ContentCard';
+import MenuCard from '../components/cards/MenuCard';
+import FoodItemCard from '../components/cards/FoodItemCard';
+import foodItems from '../temp_food_items.ts';
+import '../styles/no-scrollbar.css';
+import Footer from './Footer.tsx';
 
 const client = generateClient<Schema>();
 
+type FoodOrder = Record<string, [number, number]>;
+
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [order, setOrder] = React.useState<FoodOrder>(
+    generateInitialFoodItemSchema,
+  );
 
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
+  const totalCost = React.useMemo(() => {
+    let subTotal = parseFloat('0.00');
+    Object.values(order).forEach((priceAndCount) => {
+      const value = priceAndCount[0] * priceAndCount[1];
+      subTotal = parseFloat((subTotal + value).toFixed(2));
     });
-  }, []);
+    return subTotal;
+  }, [order]);
 
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+  function generateInitialFoodItemSchema() {
+    const initialOrder: FoodOrder = {};
+    foodItems.forEach((item) => {
+      initialOrder[item.id] = [item.price, 0];
+    });
+    return initialOrder;
+  }
+
+  function addFoodItem(id: string) {
+    setOrder((prev) => {
+      return { ...prev, [id]: [prev[id][0], prev[id][1] + 1] };
+    });
+  }
+  function removeFoodItem(id: string) {
+    setOrder((prev) => {
+      return { ...prev, [id]: [prev[id][0], prev[id][1] - 1] };
+    });
+  }
+
+  function clearOrder() {
+    setOrder(generateInitialFoodItemSchema);
   }
 
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
-    </main>
+    <div className=" overflow-hidden flex flex-row w-full h-full">
+      {/* <MainSideNavBar /> */}
+      <main className="overflow-y-auto no-scrollbar w-full h-full">
+        <CenteredContent>
+          <ContentCard>
+            <MenuCard
+              restaurantName="Minako's Bespoke Sushi"
+              totalCost={totalCost}
+            >
+              {foodItems.map((foodItem, index) => (
+                <FoodItemCard
+                  key={index}
+                  addFoodItem={addFoodItem}
+                  removeFoodItem={removeFoodItem}
+                  foodItem={foodItem}
+                />
+              ))}
+            </MenuCard>
+          </ContentCard>
+        </CenteredContent>
+        <Footer totalCost={totalCost} clearOrder={clearOrder} />
+      </main>
+    </div>
   );
 }
 
