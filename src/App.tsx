@@ -1,7 +1,6 @@
 import * as React from 'react';
-import type { Schema } from '../amplify/data/resource';
-import { generateClient } from 'aws-amplify/data';
-import MainSideNavBar from '../components/navs/MainSideNavBar';
+// import type { Schema } from '../amplify/data/resource';
+// import { generateClient } from 'aws-amplify/data';
 import CenteredContent from '../components/content/CenteredContent';
 import ContentCard from '../components/cards/ContentCard';
 import MenuCard from '../components/cards/MenuCard';
@@ -10,7 +9,7 @@ import foodItems from '../temp_food_items.ts';
 import '../styles/no-scrollbar.css';
 import Footer from './Footer.tsx';
 
-const client = generateClient<Schema>();
+// const client = generateClient<Schema>();
 
 type FoodOrder = Record<string, [number, number]>;
 
@@ -53,7 +52,6 @@ function App() {
 
   return (
     <div className=" overflow-hidden flex flex-row w-full h-full">
-      {/* <MainSideNavBar /> */}
       <main className="overflow-y-auto no-scrollbar w-full h-full">
         <CenteredContent>
           <ContentCard>

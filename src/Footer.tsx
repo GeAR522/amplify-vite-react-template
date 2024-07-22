@@ -1,11 +1,8 @@
-import React from 'react';
-
 interface IFooter {
   totalCost: number;
   clearOrder: () => void;
 }
 
-// NOTE: fix the clear button so it also sets the order amounts to 0
 export default function Footer({ totalCost, clearOrder }: IFooter) {
   return (
     <footer className="bg-gradient-to-r from-pink-900 via-transparent to-pink-400 text-white py-2 absolute bottom-0 w-full h-[80px]">

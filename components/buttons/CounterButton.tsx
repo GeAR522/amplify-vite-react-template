@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 interface ICounterButton {
   plusOrMinus: 'plus' | 'minus';
   onClick: () => void;
