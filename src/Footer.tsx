@@ -5,6 +5,7 @@ interface IFooter {
   clearOrder: () => void;
 }
 
+// NOTE: fix the clear button so it also sets the order amounts to 0
 export default function Footer({ totalCost, clearOrder }: IFooter) {
   return (
     <footer className="bg-gradient-to-r from-pink-900 via-transparent to-pink-400 text-white py-2 absolute bottom-0 w-full h-[80px]">
@@ -63,7 +64,7 @@ export default function Footer({ totalCost, clearOrder }: IFooter) {
             <p>Total Cost: £ {totalCost}</p>
             <button
               id="clear-order"
-              className="ml-6 border-2 bg-transparent border-white hover:border-stone-500 hover:text-stone-600 text-sm text-white w-[70px] h-[40px]"
+              className="ml-6 border-2 bg-transparent border-white hover:border-stone-500 hover:text-stone-600 text-sm text-white w-[70px] h-[40px] focus:outline-none"
               onClick={clearOrder}
             >
               Clear
