@@ -9,8 +9,7 @@ import foodItems from '../temp_food_items.ts';
 import '../styles/no-scrollbar.css';
 import Footer from './Footer.tsx';
 
-// const client = generateClient<Schema>();
-
+// This type uses the id of the foodItem as the key, then the price and the quantity being ordered in the array for the value.
 type FoodOrder = Record<string, [number, number]>;
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
   );
 
   const totalCost = React.useMemo(() => {
-    let subTotal = parseFloat('0.00');
+    let subTotal = 0;
     Object.values(order).forEach((priceAndCount) => {
       const value = priceAndCount[0] * priceAndCount[1];
       subTotal = parseFloat((subTotal + value).toFixed(2));
@@ -59,14 +58,19 @@ function App() {
               restaurantName="Minako's Bespoke Sushi"
               totalCost={totalCost}
             >
-              {foodItems.map((foodItem, index) => (
-                <FoodItemCard
-                  key={index}
-                  addFoodItem={addFoodItem}
-                  removeFoodItem={removeFoodItem}
-                  foodItem={foodItem}
-                />
-              ))}
+              {foodItems.map((foodItem, index) => {
+                const numberOfFoodItems = order[foodItem.id][1];
+
+                return (
+                  <FoodItemCard
+                    key={index}
+                    addFoodItem={addFoodItem}
+                    removeFoodItem={removeFoodItem}
+                    numberOfFoodItems={numberOfFoodItems}
+                    foodItem={foodItem}
+                  />
+                );
+              })}
             </MenuCard>
           </ContentCard>
         </CenteredContent>

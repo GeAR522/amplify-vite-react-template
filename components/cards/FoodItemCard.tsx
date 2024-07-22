@@ -1,28 +1,26 @@
-import * as React from 'react';
 import { FoodItem } from '../../types/FoodItem';
 import CounterButton from '../buttons/CounterButton';
 
 interface IFoodItemCard {
   foodItem: FoodItem;
+  numberOfFoodItems: number;
   addFoodItem: (id: string) => void;
-  removeFoodItem: (is: string) => void;
+  removeFoodItem: (id: string) => void;
 }
 
 export default function FoodItemCard({
   foodItem,
+  numberOfFoodItems,
   addFoodItem,
   removeFoodItem,
 }: IFoodItemCard) {
   const hasAllergies = foodItem.allergys.length > 0;
-  const [numberOfFoodItems, setNumberOfFoodItems] = React.useState(0);
 
   function addToOrder() {
-    setNumberOfFoodItems((prev) => prev + 1);
     addFoodItem(foodItem.id);
   }
   function removeFromOrder() {
     if (numberOfFoodItems > 0) {
-      setNumberOfFoodItems((prev) => prev - 1);
       removeFoodItem(foodItem.id);
     }
   }

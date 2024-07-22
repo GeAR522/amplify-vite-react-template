@@ -5,8 +5,9 @@ interface IMenuCard {
   restaurantName: string;
   totalCost: number;
 }
-// slate-500 slate-200
 function MenuCard({ children, restaurantName }: IMenuCard) {
+  const apiKey = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
+
   return (
     <div
       id="menu-card"
@@ -29,7 +30,18 @@ function MenuCard({ children, restaurantName }: IMenuCard) {
             </div>
           </div>
         </div>
-        <div className="text-3xl opacity-20">Map goes here</div>
+        <div id="google-map" className="pb-4">
+          <iframe
+            width="400"
+            height="250"
+            style={{ border: '0' }}
+            loading="lazy"
+            allowFullScreen={true}
+            referrerPolicy="no-referrer-when-downgrade"
+            src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}
+    &q=St+Helier,Jersey`}
+          ></iframe>
+        </div>
       </div>
       {children}
     </div>
