@@ -22,11 +22,15 @@ Experimenting with tailwind, hence the gradients. I created a colour scheme to i
 - move the current restaurant into a temp file for loading
 - move all the current main components into a "Main" components which will pick up the restaurant data and then load everything necessary
 
-- If time, link this to proper DB service, probably S3 to store pages and possibly even the restaurant info to call via Lambda, or dynamoDB.
+- If time, link this to some storage, probably S3 to store pages and possibly even the restaurant info, which could be called via Lambda, or stick everything in dynamoDB.
 
+- fix the social media icons
 
 
 ----
+
+
+Default info from the template
 
 
 ## AWS Amplify React+Vite Starter Template
