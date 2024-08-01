@@ -26,7 +26,7 @@ export default function FoodItemCard({
   }
 
   return (
-    <div className="flex flex-row p-5 w-full min-h-[200px] justify-between ">
+    <div className="flex flex-row flex-wrap sm:flex-nowrap p-5 w-full min-h-[200px] justify-between ">
       <div
         id="food-item-details"
         className="flex flex-col justify-center w-full"
@@ -62,9 +62,12 @@ export default function FoodItemCard({
       </div>
 
       {foodItem.img && (
-        <div id="img-container" className="pl-4 w-2/5 h-2/5 ml-[12px]">
+        <div
+          id="img-container"
+          className="sm:pl-4 sm:pt-0 pt-4 sm:w-2/5 h-2/5 sm:ml-[12px] justify-center"
+        >
           <img
-            className="border-[2px] border-stone-500 border-opacity-30 max-h-[180px] w-full"
+            className="border-[2px] border-stone-500 border-opacity-30 max-h-[180px]"
             src={foodItem.img}
             alt={foodItem.name}
           />

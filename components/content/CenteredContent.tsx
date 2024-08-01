@@ -7,7 +7,7 @@ export default function CenteredContent({
   children: React.ReactNode;
 }) {
   return (
-    <div id="centered-content" className="h-full m-12">
+    <div id="centered-content" className="h-full lg:m-12">
       {children}
     </div>
   );

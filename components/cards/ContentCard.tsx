@@ -7,7 +7,7 @@ export default function ContentCard({
 }) {
   // NOTE: come back to this later
   return (
-    <div id="content-card" className="flex p-8 justify-items-center">
+    <div id="content-card" className="flex md:p-8 justify-items-center">
       {children}
     </div>
   );
