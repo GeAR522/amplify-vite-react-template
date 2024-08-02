@@ -31,7 +31,7 @@ export default function FoodItemCard({
         id="food-item-details"
         className="flex flex-col justify-center w-full"
       >
-        <div className="flex flex-row justify-between items-center pb-2">
+        <div className="flex flex-row sm:justify-between items-center pb-2">
           <h3 className=" flex text-white text-2xl font-bold" id="food-item">
             {foodItem.name}
           </h3>
@@ -40,16 +40,16 @@ export default function FoodItemCard({
             className="flex flex-row items-center justify-end"
           >
             <p
-              className="text-white text-lg mr-4 font-bold"
+              className="text-white text-lg mr-2 sm:mr-4 font-bold"
               id="food-item-price"
             >
-              {numberOfFoodItems} x £ {foodItem.price}
+              {numberOfFoodItems} x {foodItem.price}
             </p>
             <CounterButton plusOrMinus="plus" onClick={addToOrder} />
             <CounterButton plusOrMinus="minus" onClick={removeFromOrder} />
           </div>
         </div>
-        <p className="text-white text-lg w-2/3">{foodItem.description}</p>
+        <p className="text-white text-lg sm:w-2/3">{foodItem.description}</p>
         {hasAllergies && (
           <p
             id="allergy-information"
