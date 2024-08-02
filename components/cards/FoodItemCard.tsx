@@ -37,7 +37,7 @@ export default function FoodItemCard({
           </h3>
           <div
             id="price-calc"
-            className="flex flex-row items-center justify-end"
+            className="flex flex-row items-center justify-end ml-2"
           >
             <p
               className="text-white text-lg mr-2 sm:mr-4 font-bold"
