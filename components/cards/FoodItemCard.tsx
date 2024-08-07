@@ -26,7 +26,10 @@ export default function FoodItemCard({
   }
 
   return (
-    <div className="flex flex-row flex-wrap sm:flex-nowrap p-5 w-full min-h-[200px] justify-between ">
+    <div
+      id="food-item-card"
+      className="flex sm:flex-row flex-col flex-wrap sm:flex-nowrap p-5 w-full min-h-[200px] justify-between items-start sm:items-center "
+    >
       <div
         id="food-item-details"
         className="flex flex-col justify-center w-full"
@@ -35,19 +38,6 @@ export default function FoodItemCard({
           <h3 className=" flex text-white text-2xl font-bold" id="food-item">
             {foodItem.name}
           </h3>
-          <div
-            id="price-calc"
-            className="flex flex-row items-center justify-end ml-2"
-          >
-            <p
-              className="text-white text-lg mr-2 sm:mr-4 font-bold"
-              id="food-item-price"
-            >
-              {numberOfFoodItems} x {foodItem.price}
-            </p>
-            <CounterButton plusOrMinus="plus" onClick={addToOrder} />
-            <CounterButton plusOrMinus="minus" onClick={removeFromOrder} />
-          </div>
         </div>
         <p className="text-white text-lg sm:w-2/3">{foodItem.description}</p>
         {hasAllergies && (
@@ -60,13 +50,26 @@ export default function FoodItemCard({
           </p>
         )}
       </div>
-
+      <div
+        id="price-calc"
+        className="flex flex-row pt-4 sm:pt-0 sm:text-nowrap items-center justify-end sm:ml-2"
+      >
+        <p
+          className="text-white text-lg mr-2 sm:mr-4 font-bold"
+          id="food-item-price"
+        >
+          {numberOfFoodItems} x {foodItem.price}
+        </p>
+        <CounterButton plusOrMinus="plus" onClick={addToOrder} />
+        <CounterButton plusOrMinus="minus" onClick={removeFromOrder} />
+      </div>
       {foodItem.img && (
         <div
           id="img-container"
           className="sm:pl-4 sm:pt-0 pt-4 sm:w-2/5 h-2/5 sm:ml-[12px] justify-center"
         >
           <img
+            id="food-item-img"
             className="border-[2px] border-stone-500 border-opacity-30 max-h-[180px]"
             src={foodItem.img}
             alt={foodItem.name}
